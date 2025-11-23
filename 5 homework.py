@@ -117,7 +117,6 @@ def populate_db_from_loader(session, data):
 
     for item_dict in data:
         try:
-            # Извлечение всех нужных данных
             seller_name = item_dict['Продавец']
             item_name = item_dict['Название']
             price = int(item_dict['Цена'])
@@ -145,7 +144,6 @@ def populate_db_from_loader(session, data):
             print(f"Пропущена запись из-за ошибки формата данных: {e}")
             continue
 
-        # 1. Получаем или создаем поставщика
         if seller_name not in suppliers_cache:
             supplier = Suppliers(SupplierName=seller_name)
             session.add(supplier)
@@ -154,7 +152,6 @@ def populate_db_from_loader(session, data):
         else:
             supplier = suppliers_cache[seller_name]
 
-        # 2. Создаем заказ с дополнительными данными
         order_name = f"Order SKU: {sku_val}"
         order = Orders(
             OrderName=order_name,
@@ -168,7 +165,6 @@ def populate_db_from_loader(session, data):
         session.add(order)
         session.flush()
 
-        # 3. Создаем товар с дополнительными данными
         good = Goods(
             GoodsName=item_name,
             Price=price,
