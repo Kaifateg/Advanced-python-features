@@ -211,7 +211,7 @@ async def main_process():
         server="localhost",
         port=5432,
         user="postgres",
-        password="aH5i6gzh*",
+        password="password",
         db_name="synergy",
         sql_type="PostgresSQL"
     )
